@@ -77,9 +77,24 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+development:
+  <<: *default
+  host: <%= ENV["APP_RAILWAY_DATABASE_HOST"] %>
+  database: <%= ENV["APP_RAILWAY_DATABASE_NAME"] %>
+  username: <%= ENV["APP_RAILWAY_DATABASE_USERNAME"] %>
+  password: <%= ENV["APP_RAILWAY_DATABASE_PASSWORD"] %>
+test:
+  <<: *default
+  host: <%= ENV["TEST_APP_RAILWAY_DATABASE_HOST"] %> 
+  database: <%= ENV["TEST_RAILWAY_DATABASE_NAME"] %>
+  username: <%= ENV["TEST_RAILWAY_DATABASE_USERNAME"] %>
+  password: <%= ENV["TEST_RAILWAY_DATABASE_PASSWORD"] %>
 production:
   <<: *default
-  database: <%= ENV['PGDATABASE'] %>
-  username: <%= ENV['PGUSER'] %>
-  password: <%= ENV['PGPASSWORD'] %>
-  host: <%= ENV['PGHOST'] %>
+  url: <%= ENV["DATABASE_URL"] %>
+  host: <%= ENV["PGHOST"] %>
+  database: <%= ENV["PGDATABASE"] %>
+  username: <%= ENV["PGUSER"] %>
+  password: <%= ENV["PGPASSWORD"] %>
+  port: <%= ENV["PGPORT"] %>
+
