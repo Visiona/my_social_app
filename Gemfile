@@ -3,6 +3,8 @@ source "https://rubygems.org"
 ruby "3.3.3"
 
 gem 'devise'
+gem 'net-pop', '~> 0.1.2'
+gem 'net-protocol', '~> 0.2.2'
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
