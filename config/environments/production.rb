@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
-  ENV['RAILS_MASTER_KEY'] = File.read('config/master.key')
+  # ENV['RAILS_MASTER_KEY'] = File.read('config/master.key')
   config.require_master_key = true
   config.master_key = ENV['RAILS_MASTER_KEY']
 
