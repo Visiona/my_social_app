@@ -39,7 +39,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 # COPY config/master.key /rails/config/master.key
 ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 # ENV RAILS_MASTER_KEY="e8f10a8d63de440f8cf586e13b772f61"
-# RUN echo $RAILS_MASTER_KEY
+RUN echo $RAILS_MASTER_KEY
 # Precompiling assets for production with the real RAILS_MASTER_KEY
 RUN ./bin/rails assets:precompile
 
