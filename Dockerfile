@@ -37,8 +37,8 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Copy master.key from build context to be used for assets precompilation
 # This line assumes that you have master.key in your build context
 # COPY config/master.key /rails/config/master.key
-ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-# ENV RAILS_MASTER_KEY="e8f10a8d63de440f8cf586e13b772f61"
+# ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+ENV RAILS_MASTER_KEY="4a42cac240e8e15e42e389cdf5d95e56"
 RUN echo $RAILS_MASTER_KEY
 # Precompiling assets for production with the real RAILS_MASTER_KEY
 RUN ./bin/rails assets:precompile
