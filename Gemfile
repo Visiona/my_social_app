@@ -7,6 +7,7 @@ gem 'devise'
 gem "net-pop", github: "ruby/net-pop"
 gem 'net-protocol', '~> 0.2.2'
 
+gem 'rake', '~> 13.2.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
