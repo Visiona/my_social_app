@@ -1,0 +1,42 @@
+name: Deploy Rails App
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.3'  # Match your Ruby version
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+      - name: Build Docker image
+        run: |
+          docker build -t my_social_app_image .
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image
+        run: |
+          docker tag my_social_app_image visiona15/my_social_app_image:latest
+          docker push visiona15/my_social_app_image:latest
+      - name: Deploy to server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.root }}@${{ secrets.web-production-a8f31.up.railway.app }} 'docker pull visiona15/my_social_app_image:latest && docker run -d visiona15/my_social_app_image:latest'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.AAAAB3NzaC1yc2EAAAADAQABAAACAQCwRVa63t8Z9RHGIdwu7Xdu5wdFWlLW5hQyyT7k8HOaj8E6fP1qblsYLOcLQVqDFqxuj0gbQBnJMkRneeoviRLvVaVZ2m00T1WWLzSvTmhndPqaOYx50GD5njhzBz37IMfqFqv2OzQWuU0PoXLApOOKitzJ0EVBU29Qs7v7I1gOeHbV2jhhh4wpZGo79ehsUq9AXq1BXR5ZIPaLc4QCtfmziMow6rz0Vv8G1RXm8OuOGogAwFCT7vG/W+J9kSIYoEXYH8IVawRnwR9Hc2fNyfXVA7G98DklXTXelPqDxCU1WmVdl9Ju/Q6mv2ceHhuJpyaFk4A3miyKIjrJnfl51Ed/ZMX4EJcXNb0xG+KlwAKmaIQVMcwecEX+M3cIy8VGwg5sGC3wozCj8PQiehWWsi1FA5uJM7k4cPVhaF09EdtWzmdnDZYgPakvbCTNwqxpj1hVMybHMAAaKJHWFicm4VtoZZEJOuW8teGqgsc7GowIwXYiJ6qNAwbadDaT1HgDtTlZQxxUpNVlK5Wv0ltR18Ui4t0q7UPvUW0YE62/3I38Cr+MCl/aoHzle+eP38G5FUN3CvwTLdpeoAtnaypmZKOAZvvwXvu5Jz4GYOT8EritFa+0ZB6IQ10l9H+vO9G2kAx3P6VN5sV13o9H4Z6v9qcJQK17cCyvThgSzwx8ov/sZw== darbis@gmail.com }}
