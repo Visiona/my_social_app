@@ -86,8 +86,9 @@ test:
 #
 production:
   <<: *default
-  database: my_social_app_production
-  username: <%= ENV["PGUSER"] %>
-  password: <%= ENV["PGPASSWORD"] %>
-  host: <%= ENV["PGHOST"] %>
-  port: <%= ENV["PGPORT"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # database: my_social_app_production
+  # username: <%= ENV["PGUSER"] %>
+  # password: <%= ENV["PGPASSWORD"] %>
+  # host: <%= ENV["PGHOST"] %>
+  # port: <%= ENV["PGPORT"] %>
