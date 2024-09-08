@@ -41,7 +41,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 ENV RAILS_MASTER_KEY="4a42cac240e8e15e42e389cdf5d95e56"
 RUN echo $RAILS_MASTER_KEY
 # Precompiling assets for production with the real RAILS_MASTER_KEY
-RUN ./bin/rails assets:precompile
+RUN ./bin/rails assets:precompile --trace
 
 # Final stage for app image
 FROM base
